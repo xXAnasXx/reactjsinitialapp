@@ -4,26 +4,28 @@ import { useState, useEffect } from 'react';
 
 const Cards = () => {
 
-    const [posts, setPosts] = useState([]);
+    const [cases, setCases] = useState([]);
 
     useEffect(() => {
-        fetch('https://api.opencovid.ca/summary')
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-            setPosts(data);
-        })
-        .catch((err) => {
-            console.log(err.message);
-        });
+        fetch('https://api.opencovid.ca/timeseries?stat=cases&date=1&geo=can')
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setCases(data.data.cases);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
     }, []);
 
-    return(
+    return (
         <div className="Body container">
             <div className='row gx-5'>
                 <div className='col-sm'>
                     <div className='card bg-danger text-white ml-3 cardS'>
-                        Cases
+                        Cases : {
+                            cases == undefined ? <i>None</i> : <i>{cases[0].value}</i>
+                        }
                     </div>
                 </div>
                 <div className='col-sm'>
@@ -52,13 +54,13 @@ const Cards = () => {
                     </div>
                 </div>
             </div>
-            <div className="posts-container">
+            {/*             <div className="posts-container">
                 {
-                posts.data.map((post) => {
+                posts.map((post) => {
                     return (
-                        <div className="post-card" key={post.id}>
-                        <h2 className="post-title">{post.title}</h2>
-                        <p className="post-body">{post.body}</p>
+                        <div className="post-card" key={post.region}>
+                        <h2 className="post-title">{post.cases}</h2>
+                        <p className="post-body">{post.deaths}</p>
                         <div className="button">
                         <div className="delete-btn">Delete</div>
                         </div>
@@ -66,10 +68,10 @@ const Cards = () => {
                     );
                 })
                 }
-            </div>
+            </div> */}
         </div>
 
-        
+
     )
 }
 

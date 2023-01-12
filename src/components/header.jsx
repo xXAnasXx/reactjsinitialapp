@@ -12,8 +12,8 @@ const Header = () => {
                 <i>{date}</i>
             </div>
             <div className="col-2">
-                <i>Mode : </i>
-                <button disabled className='btn btn-primary'>Global</button>
+                <i>Country : </i>
+                <button disabled className='btn btn-outline-light'>Canada</button>
             </div>
         </div>
     )
