@@ -6,12 +6,12 @@ const Header = () => {
     const [date, setDate] = useState("");
 
     return(
-        <div className="Header d-flex justify-content-between">
-            <div>
+        <div className="Header row w-100 justify-content-between">
+            <div className="col">
                 <i>Date : </i>
                 <i>{date}</i>
             </div>
-            <div>
+            <div className="col">
                 <i>Mode : </i>
                 <button disabled className='bg-primary text-white'>Global</button>
             </div>
