@@ -13,7 +13,7 @@ const Header = () => {
             </div>
             <div className="col">
                 <i>Mode : </i>
-                <button disabled className='bg-primary text-white'>Global</button>
+                <button disabled className='btn btn-primary'>Global</button>
             </div>
         </div>
     )
