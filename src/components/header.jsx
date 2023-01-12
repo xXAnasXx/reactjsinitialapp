@@ -24,7 +24,7 @@ const Header = () => {
             </div>
             <div className="col-2">
                 <i>Country : </i>
-                <button disabled className='btn btn-outline-light'>Canada</button>
+                <button disabled className='btn btn-outline-dark'>Canada</button>
             </div>
         </div>
     )
