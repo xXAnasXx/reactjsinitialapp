@@ -1,8 +1,7 @@
 import '../style/customisedStyle.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect, useMemo } from 'react';
-import { render } from 'react-dom';
-import { useTable } from 'react-table'
+import Table from './table';
 
 const ArrayInfos = () => {
     const [covidData, setCovidData] = useState([]);
@@ -50,41 +49,32 @@ const ArrayInfos = () => {
             },
             {
                 Header: 'VC dose 1',
-                accessor: 'vc_dose_1'
+                accessor: 'vaccine_coverage_dose_1'
             },
             {
                 Header: 'VC dose 1 daily',
-                accessor: 'vc_dose_1_daily'
+                accessor: 'vaccine_coverage_dose_1_daily'
             },
             {
                 Header: 'VC dose 2',
-                accessor: 'vc_dose_2'
+                accessor: 'vaccine_coverage_dose_2'
             },
             {
                 Header: 'VC dose 2 daily',
-                accessor: 'vc_dose_2_daily'
+                accessor: 'vaccine_coverage_dose_2_daily'
             },
             {
                 Header: 'VC dose 3',
-                accessor: 'vc_dose_3'
+                accessor: 'vaccine_coverage_dose_3'
             },
             {
                 Header: 'VC dose 3 daily',
-                accessor: 'vc_dose_3_daily'
+                accessor: 'vaccine_coverage_dose_3_daily'
             },
-        ]
+        ],
+        []
     )
 
-    
-    const tableInstance = covidData == undefined ? [] : useTable({ columns, covidData });
-
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-    } = tableInstance
     
     useEffect(() => {
         fetch('https://api.opencovid.ca/summary')
@@ -98,57 +88,11 @@ const ArrayInfos = () => {
             });
     }, []);
 
+   
     return (
-        <div className='mt-5'>
-            <table {...getTableProps()} className='table table-sm table-striped'>
-                <thead>
-                    { // loop over the header rows
-                    headerGroups.map( headerGroup => (
-                        // Apply the header row props
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            { // loop over the headers in each row
-                            headerGroup.headers.map(column => (
-                                // Apply the header cell props
-                                <th {...column.getHeaderProps()}>
-                                    { // Render the header
-                                    column.render('Header')
-                                    }
-                                </th>
-                            ))
-                            }
-                            <th></th>
-                        </tr>
-                    ))
-                    }
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    {// Loop over the table rows
-                    rows.map(row => {
-                        // Prepare the row for display
-                        prepareRow(row)
-                        return (
-                            // Apply the row props
-                            <tr {...row.getRowProps()}>
-                                {// loop over the rows cells
-                                row.cells.map(cell => {
-                                    // Apply the cell props
-                                    return(
-                                        <td {...cell.getCellProps()}>
-                                            {// Render the cell contents
-                                            cell.render('Cell')
-                                            }
-                                        </td>
-                                    )
-                                })
-                                }
-                            </tr>
-                        )
-                    })
-                    }
-                </tbody>
-            </table>
-        </div>
+            covidData.length != 0 ? <Table columns = {columns} covidData = {covidData}/> : null
     )
+    
 }
 
 export default ArrayInfos;
