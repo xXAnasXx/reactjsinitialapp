@@ -1,13 +1,16 @@
-import { useTable } from 'react-table'
+import { useTable, useSortBy } from 'react-table'
 
 const Table = ({columns, covidData}) => {
 
 
-    console.log('Columns : ');
+   /* console.log('Columns : ');
     console.log(columns);
     console.log('Covid Data : ');
-    console.log(covidData);
-    const tableInstance = useTable({ columns, data : covidData });
+    console.log(covidData); */
+    const tableInstance = useTable(
+        { columns, data : covidData },
+         useSortBy
+         );
 
     const {
         getTableProps,
@@ -28,10 +31,16 @@ const Table = ({columns, covidData}) => {
                                 { // loop over the headers in each row
                                     headerGroup.headers.map(column => (
                                         // Apply the header cell props
-                                        <th {...column.getHeaderProps()}>
+                                        // Add the sorting props to control sorting. For this example
+                                        // we can add them into the header props
+                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                                             { // Render the header
                                                 column.render('Header')
                                             }
+                                            {/* Add a sort direction indicator */}
+                                            <span>
+                                                {column.isSorted ? ( column.isSortedDesc ? '🔽' : '🔼') : ''}
+                                            </span>
                                         </th>
                                     ))
                                 }
