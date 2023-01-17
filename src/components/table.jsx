@@ -1,4 +1,5 @@
-import { useTable, useSortBy } from 'react-table'
+import { useTable, useSortBy, useGlobalFilter } from 'react-table'
+import GlobalFilter from './globalFilter';
 
 const Table = ({columns, covidData}) => {
 
@@ -9,7 +10,8 @@ const Table = ({columns, covidData}) => {
     console.log(covidData); */
     const tableInstance = useTable(
         { columns, data : covidData },
-         useSortBy
+         useSortBy,
+         useGlobalFilter
          );
 
     const {
@@ -18,10 +20,15 @@ const Table = ({columns, covidData}) => {
         headerGroups,
         rows,
         prepareRow,
+        state,
+        setGlobalFilter,
     } = tableInstance
+
+    const {globalFilter} = state ;
 
     return (
         <div className='mt-5'>
+            <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
             <table {...getTableProps()} className='table table-responsive table-sm table-striped'>
                 <thead>
                     { // loop over the header rows
