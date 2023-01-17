@@ -10,8 +10,8 @@ const Table = ({columns, covidData}) => {
     console.log(covidData); */
     const tableInstance = useTable(
         { columns, data : covidData },
+         useGlobalFilter,
          useSortBy,
-         useGlobalFilter
          );
 
     const {
