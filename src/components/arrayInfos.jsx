@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect, useMemo } from 'react';
 import Table from './table';
 import { ProgressBar } from 'react-bootstrap';
+import Graph from './graph';
 
 const ArrayInfos = () => {
     const [covidData, setCovidData] = useState([]);
@@ -14,6 +15,10 @@ const ArrayInfos = () => {
             },
             {
                 Header: 'Cases',
+                accessor: 'cases'
+            },
+            {
+                Header: 'Cases Daily',
                 accessor: 'cases_daily'
             },
             {
@@ -94,7 +99,11 @@ const ArrayInfos = () => {
 
    
     return (
-            covidData.length != 0 ? <Table columns = {columns} covidData = {covidData}/> : null
+        <div>
+            <Graph covidData={covidData}/>
+            {covidData.length != 0 ? <Table columns = {columns} covidData = {covidData}/> : null}
+        </div>
+
     )
     
 }
