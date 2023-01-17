@@ -16,8 +16,15 @@ const CharFilter = ({
         <span>
             Search:{' '}
             <input 
-                value={value || ""} 
+                value={value || ""}
+                onChange={e => {
+                    setValue(e.target.value);
+                    onChange(e.target.value);
+                }}
+                placeholder={`${count} records...`} 
             />
         </span>
     )
 }
+
+export default CharFilter;
