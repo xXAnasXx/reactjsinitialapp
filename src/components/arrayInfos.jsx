@@ -2,6 +2,7 @@ import '../style/customisedStyle.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect, useMemo } from 'react';
 import Table from './table';
+import { ProgressBar } from 'react-bootstrap';
 
 const ArrayInfos = () => {
     const [covidData, setCovidData] = useState([]);
@@ -49,7 +50,10 @@ const ArrayInfos = () => {
             },
             {
                 Header: 'VC dose 1',
-                accessor: 'vaccine_coverage_dose_1'
+                accessor: 'vaccine_coverage_dose_1',
+                Cell: ({value}) => (
+                    <ProgressBar now={value} label={value + "%"}/>
+                )
             },
             {
                 Header: 'VC dose 1 daily',
