@@ -95,7 +95,7 @@ const Cards = () => {
     }
     return (
         <div className="Body container">
-            <div className='row gx-5'>
+            <div className='row gx-4'>
                 <div className='col-sm'>
                     <div className='card bg-danger text-white ml-3 cardS'>
                         Cases : {
