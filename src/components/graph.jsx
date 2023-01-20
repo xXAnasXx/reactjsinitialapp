@@ -1,6 +1,6 @@
 import { Chart } from "react-google-charts";
 import React from "react";
-
+import { Spinner } from "react-bootstrap";
 
 function pieChartDataPreparator(covidData){
     // browse each row and pass y ((cases / (totalCases))*100 ) and label (region)
@@ -27,15 +27,32 @@ const options = {
     //colors: ['#FF5733','#FFAC33','#DDFF33','#339DFF']
 };
 const Graph = ({covidData}) => {
-    return (
-        <Chart 
-        chartType="PieChart"
-        data={pieChartDataPreparator(covidData)}
-        options={options}
-        width={"70%"}
-        height={"300px"}
-        />
-    )
+
+    if(covidData.length > 0) {
+        return(
+            <Chart 
+                chartType="PieChart"
+                data={pieChartDataPreparator(covidData)}
+                options={options}
+                width={"70%"}
+                height={"300px"}
+             />
+        )
+    }
+    else {
+        return (
+            /*         <Chart 
+                    chartType="PieChart"
+                    data={pieChartDataPreparator(covidData)}
+                    options={options}
+                    width={"70%"}
+                    height={"300px"}
+                    /> */
+                    <Spinner animation="border" role="status" variant="primary">
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                )
+    }
 }
 
 export default Graph;
